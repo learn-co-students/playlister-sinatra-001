@@ -1,7 +1,15 @@
 ENV['SINATRA_ENV'] ||= "development"
 
+
 require 'bundler/setup'
 Bundler.require(:default, ENV['SINATRA_ENV'])
+
+# require 'rack-flash'
+
+if ENV["SINATRA_ENV"] == "test"
+  ActiveRecord::Base.logger = nil
+end
+
 
 ActiveRecord::Base.establish_connection(
   :adapter => "sqlite3",
